@@ -6,6 +6,7 @@ import {AddDotContext} from '../../contexts/AddDotContext'
 import { Button } from '@mui/material'
 import "animate.css"
 import swal from 'sweetalert'
+import FinCompra from '../FinCompra'
 
 function Carrito() {
 
@@ -40,7 +41,7 @@ function Carrito() {
             )
         } )}
         <h3 className={styles.total}>Total: ${addDot(cart.reduce((acc, element) => acc + element.producto.precio*element.producto.cantidad, 0))}</h3>
-        <Button variant="contained" sx={{m: 7}} onClick={swal("Good job!", "You clicked the button!", "success")}>Finalizar compra</Button>
+        <FinCompra/>
     </div>
   )
 }

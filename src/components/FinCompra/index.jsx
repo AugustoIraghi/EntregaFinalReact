@@ -1,32 +1,36 @@
 import { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 import swal from "sweetalert";
+import Button from "@mui/material/Button";
+import { AddDotContext } from "../../contexts/AddDotContext";
 
 function FinCompra() {
 
     const { cart } = useContext(CartContext)
+    const { addDot } = useContext(AddDotContext)
+
+    const finCompra = () => {
+        swal({
+            title: "¿Está seguro que quiere finalizar la compra?",
+            text: "El total de la comra es $"+addDot(cart.reduce((acc, element) => acc + element.producto.precio*element.producto.cantidad, 0)),
+            icon: "warning",
+            buttons: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                swal({
+                    title: "Compra finalizada!",
+                    text: "Gracias por comprar con nosotros",
+                    icon: "success",
+                    button: "Ok",
+                  });
+            } else {
+            }
+          })
+        }
 
   return (
-    // <button 
-    // onClick={
-    //     swal("¿Está seguro que quiere finalizar la compra?", "El total de la comra es $"+addDot(cart.reduce((acc, element) => acc + element.producto.precio*element.producto.cantidad, 0)))}>
-    //         Finalizar compra</button>
-    <button onClick={
-        swal("¿Está seguro que quiere finalizar la compra?", {
-            buttons: {
-              cancel: "Seguir comprando",
-              catch: {
-                text: "Finalizar",
-                value: "finalize",
-              },
-            },
-          })
-          .then((value) => {
-                swal("Gotcha!", "Pikachu was caught!", "success");
-          })
-    }>
-        Finalizar compra
-    </button>
+    <Button variant="contained" sx={{m: 4}} onClick={finCompra}>Finalizar compra</Button>
   )
 }
 
