@@ -6,7 +6,7 @@ import { AddDotContext } from "../../contexts/AddDotContext";
 
 function FinCompra() {
 
-    const { cart } = useContext(CartContext)
+    const { cart, setCart } = useContext(CartContext)
     const { addDot } = useContext(AddDotContext)
 
     const finCompra = () => {
@@ -24,7 +24,7 @@ function FinCompra() {
                     icon: "success",
                     button: "Ok",
                   });
-            } else {
+                setCart([])
             }
           })
         }
